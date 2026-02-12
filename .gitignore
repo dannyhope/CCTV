@@ -1,0 +1,17 @@
+# Build artifacts
+.build/
+.DS_Store
+
+# Xcode
+*.xcodeproj/
+*.xcworkspace/
+.swiftpm/
+
+# IDEs
+.vscode/
+*.swp
+*.swo
+*~
+
+# Application Support
+Library/Application Support/CCTV/
