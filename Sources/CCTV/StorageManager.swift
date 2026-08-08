@@ -39,6 +39,20 @@ final class StorageManager {
 			.appendingPathComponent("\(dateString).mp4")
 	}
 
+	func ocrVerbatimDirectory(for date: Date = Date()) -> URL {
+		let dateString = dateFormatter.string(from: date)
+		return baseURL
+			.appendingPathComponent("ocr", isDirectory: true)
+			.appendingPathComponent("verbatim", isDirectory: true)
+			.appendingPathComponent(dateString, isDirectory: true)
+	}
+
+	var ocrIndexURL: URL {
+		baseURL
+			.appendingPathComponent("ocr", isDirectory: true)
+			.appendingPathComponent("index.json")
+	}
+
 	func ensureDirectory(_ url: URL) throws {
 		try FileManager.default.createDirectory(
 			at: url,
@@ -49,6 +63,11 @@ final class StorageManager {
 	func screenshotFilename(displayIndex: Int, date: Date = Date()) -> String {
 		let timestamp = timestampFormatter.string(from: date)
 		return "display-\(displayIndex)_\(timestamp).jpg"
+	}
+
+	func ocrVerbatimFilename(displayIndex: Int, date: Date = Date()) -> String {
+		let timestamp = timestampFormatter.string(from: date)
+		return "display-\(displayIndex)_\(timestamp).json"
 	}
 
 	func screenshotCountToday() -> Int {

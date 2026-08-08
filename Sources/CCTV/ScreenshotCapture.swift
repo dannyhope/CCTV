@@ -37,6 +37,19 @@ final class ScreenshotCapture {
 			let fileURL = dir.appendingPathComponent(filename)
 
 			try saveAsJPEG(image: image, to: fileURL, quality: 0.7)
+
+			// OCR is best-effort: a recognition or store failure must not
+			// prevent the screenshot from being kept.
+			do {
+				let text = try await OCRProcessor().recognizeText(in: image)
+				try await OCRStore.shared.store(
+					text: text,
+					displayIndex: index,
+					date: now
+				)
+			} catch {
+				// Intentionally ignored — capture already succeeded.
+			}
 		}
 	}
 

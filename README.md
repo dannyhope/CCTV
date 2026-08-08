@@ -11,6 +11,7 @@ CCTV runs as a menu bar app and captures a screenshot of all connected displays 
 ## Features
 
 - **Automatic screenshotting** – Captures all displays every 60 seconds (no audio)
+- **OCR text index** – Extracts on-screen text with macOS Vision OCR and stores it verbatim plus a term→times index for later search
 - **Daily video compilation** – Automatically compiles screenshots into MP4 format each day
 - **Menu bar control** – Start/stop capturing, compile videos manually, view storage folder
 - **Resume on wake** – Resumes capturing after sleep and catches up on missed compilations
@@ -42,22 +43,28 @@ The bundled app will be located at `.build/release/CCTV.app`.
 
 ## Storage
 
-Screenshots and videos are saved to:
+Screenshots, videos, and OCR text are saved to:
 ```
 ~/Library/Application Support/CCTV/
 ├── screenshots/
 │   ├── YYYY-MM-DD/
-│   │   ├── display-0_HH-MM-SS.jpg
-│   │   ├── display-0_HH-MM-SS.jpg
+│   │   ├── display-0_HH-mm-ss.jpg
 │   │   └── ...
 │   └── ...
-└── videos/
-    ├── YYYY-MM-DD.mp4
-    ├── YYYY-MM-DD-display-1.mp4
-    └── ...
+├── videos/
+│   ├── YYYY-MM-DD.mp4
+│   ├── YYYY-MM-DD-display-1.mp4
+│   └── ...
+└── ocr/
+    ├── verbatim/
+    │   └── YYYY-MM-DD/
+    │       ├── display-0_HH-mm-ss.json
+    │       └── ...
+    └── index.json
 ```
 
-Screenshots are automatically deleted after successful video compilation.
+Screenshots are automatically deleted after successful video compilation. OCR verbatim
+records and the term index are kept so they can power a future search UI.
 
 ## Menu Bar Options
 
@@ -75,6 +82,7 @@ Screenshots are automatically deleted after successful video compilation.
 1. Every 60 seconds, the app uses `ScreenCaptureKit` to capture all displays at 2x resolution
 2. Each display is saved as a JPEG with 70% compression
 3. Screenshots are timestamped and organized by date
+4. Vision OCR extracts text from each image; the full text is stored under `ocr/verbatim/` and terms are appended to `ocr/index.json`
 
 ### Compilation Phase
 - Every 5 minutes, the app checks if it's 00:05–00:10 (midnight window)
