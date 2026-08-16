@@ -10,12 +10,14 @@ CCTV runs as a menu bar app and captures a screenshot of all connected displays 
 
 ## Features
 
+- **Guided permission setup** – Checks on launch that it can record the screen, and walks you through granting access if it can't
 - **Automatic screenshotting** – Captures all displays every 60 seconds (no audio)
 - **Daily video compilation** – Automatically compiles screenshots into MP4 format each day
-- **Menu bar control** – Start/stop capturing, compile videos manually, view storage folder
+- **Menu bar / Dock presence** – Show in the menu bar, the Dock, or both (`Show In` in the menu)
+- **Menu control** – Start/stop capturing, compile videos manually, view storage folder
 - **Resume on wake** – Resumes capturing after sleep and catches up on missed compilations
 - **Multi-display support** – Captures all connected displays; creates separate videos for each if needed
-- **Low footprint** – Runs as an accessory app (no main window)
+- **Low footprint** – No main window; defaults to menu bar only
 
 ## Building
 
@@ -25,20 +27,31 @@ CCTV runs as a menu bar app and captures a screenshot of all connected displays 
 
 ### Build and Run
 
+Native Swift can’t hot-reload like a web app — a rebuild is required — but you do **not**
+need to copy into `/Applications` while developing. Work from the project build:
+
 ```bash
 cd "$(dirname "$0")"
 
-# Build the app
-make build
-
-# Build, bundle, codesign, and run
+# Quit any running CCTV, rebuild, codesign, relaunch (.build/release/CCTV.app)
 make run
 
-# Clean build artefacts
+# Same, automatically, whenever you save a Swift / Info.plist file (needs fswatch)
+make watch
+
+# Optional: install that build into /Applications for Login Items / daily use
+make install
+
 make clean
 ```
 
-The bundled app will be located at `.build/release/CCTV.app`.
+Dev launches use `.build/release/CCTV.app`. A stale `/Applications/CCTV.app` is a
+different binary — quit it (or use `make run`, which kills every CCTV process) so you’re
+not looking at an old build. Each rebuild bumps `CFBundleVersion` (check **About CCTV**);
+the marketing version stays until you change it on purpose.
+
+Ad-hoc signing means macOS may ask you to re-enable Screen Recording after rebuilds —
+that’s a platform limitation, not the watch workflow.
 
 ## Storage
 
@@ -59,13 +72,17 @@ Screenshots and videos are saved to:
 
 Screenshots are automatically deleted after successful video compilation.
 
-## Menu Bar Options
+## Menu Options
 
-- **Status** – Shows current state (Capturing/Idle) and screenshot count for today
+(Available from the menu bar icon and/or the Dock, depending on **Show In**.)
+
+- **Status** – Shows current state (Capturing/Idle/Blocked) and screenshot count for today
+- **Grant Screen Recording Permission…** – Only shown when access is missing; opens the setup window
 - **Start/Stop Capturing** – Toggle automatic 60-second capture interval
 - **Compile Today's Video** – Manually compile today's screenshots into video
 - **Take Screenshot Now** – Capture immediately without waiting for the next interval
 - **Open Storage Folder** – Browse screenshots and videos in Finder
+- **Show In** – Menu Bar, Dock, or Both
 - **About CCTV** – App version and website link
 - **Quit** – Stop the app
 
@@ -93,9 +110,25 @@ Screenshots are automatically deleted after successful video compilation.
 2. Once running, the app will appear in the menu bar as a camera icon
 3. To keep it running on startup, add the app to **System Preferences > General > Login Items**
 
+## Permissions
+
+CCTV needs **Screen & System Audio Recording** access. On launch it checks for it, and
+if it's missing the app opens a setup window that links straight to the right pane in
+System Settings and updates itself the moment you grant access. The macOS permission
+dialog is shown at most once; after that CCTV relies on its own setup window so it
+doesn't keep nagging.
+
+Because `make` signs the app ad hoc, macOS treats each rebuild as a new app. System
+Settings may still show CCTV as on from an older build — turn the entry off and on
+again, or remove and re-add it. To rehearse the flow without
+touching real settings:
+
+```bash
+open --env CCTV_FORCE_PERMISSION_DENIED=1 .build/release/CCTV.app
+```
+
 ## Notes
 
-- The app requests screen capture permission on first run (required for ScreenCaptureKit)
 - Videos are compiled at midnight UTC, not local time (adjust system timezone if needed)
 - Multi-display setups create separate video files per display
 - Storage grows at ~1–2 GB per day depending on display resolution and activity

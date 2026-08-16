@@ -1,0 +1,8 @@
+---
+description: CCTV (and Danny Mac apps) must offer menu bar, Dock, or both
+alwaysApply: true
+---
+
+# Mac app presence
+
+CCTV must let the user choose **Menu Bar**, **Dock**, or **Both**. See the global rule `mac-app-presence` and `docs/spec.md`. Never remove this choice without an explicit product decision.
