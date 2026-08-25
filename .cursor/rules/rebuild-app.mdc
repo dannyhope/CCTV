@@ -7,12 +7,14 @@ alwaysApply: true
 
 After any change that affects the app (code, Info.plist, resources, Makefile):
 
-1. Rebuild with `make codesign` (bumps `CFBundleVersion` and produces `.build/release/CCTV.app`).
+1. Rebuild with `make codesign` (bumps `CFBundleVersion` and produces `.build/release/CCTV-<n>.app`).
 2. Do **not** copy the app to Desktop or elsewhere unless asked.
-3. Leave the double-clickable bundle at `.build/release/CCTV.app`.
+3. Leave the double-clickable bundle at `.build/release/CCTV-<n>.app` (number matches the build).
 
 ## Versioning
 
 - Bump **build number** (`CFBundleVersion`) on every rebuild — not the marketing version.
 - Keep `CFBundleShortVersionString` (e.g. `0.3.0`) for intentional releases only.
-- The Makefile increments the build number automatically during `bundle` / `codesign`.
+- The Makefile increments the build number automatically during `bundle` / `codesign`, and
+  stamps it into `CFBundleDisplayName` (`CCTV n`), `CFBundleIdentifier`
+  (`co.uk.dannyhope.cctv.n`), and the `.app` filename so TCC / Finder don’t confuse builds.

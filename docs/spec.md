@@ -114,15 +114,18 @@ appears to do nothing.
 ## Known constraints
 
 - The build signs the app ad hoc (`codesign --sign -`). macOS ties screen recording
-  access to the signature, so **every rebuild can break the grant** even when System
-  Settings still shows CCTV switched on. Turn the entry off and on again, or remove
-  and re-add the app. A stable signing identity would avoid this.
+  access to the signature, so **every rebuild needs a fresh grant**. Each rebuild
+  stamps the build number into the display name, bundle id
+  (`co.uk.dannyhope.cctv.<n>`), and app filename (`CCTV-<n>.app`) so System Settings
+  never shows an older “CCTV” entry as if it applied to this binary. Grant the
+  numbered app (e.g. **CCTV 9**); remove stale plain **CCTV** entries when you see
+  them. A stable signing identity would avoid re-granting after every rebuild.
 - Compilation uses the system timezone, so the midnight window follows local time.
 
 ## Development
 
-Day-to-day work uses `.build/release/CCTV.app` via `make run` (or `make watch` to
-rebuild and relaunch on save). `/Applications/CCTV.app` is only for a deliberate
+Day-to-day work uses `.build/release/CCTV-<n>.app` via `make run` (or `make watch` to
+rebuild and relaunch on save). `/Applications/CCTV-<n>.app` is only for a deliberate
 `make install` — it is not updated by ordinary rebuilds. There is no live code reload;
 Swift must be recompiled, but quit → rebuild → relaunch is one command.
 
@@ -130,5 +133,5 @@ Set `CCTV_FORCE_PERMISSION_DENIED=1` to rehearse the permission flow without cha
 real system settings:
 
 ```bash
-open --env CCTV_FORCE_PERMISSION_DENIED=1 .build/release/CCTV.app
+open --env CCTV_FORCE_PERMISSION_DENIED=1 .build/release/CCTV-<n>.app
 ```

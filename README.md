@@ -33,25 +33,26 @@ need to copy into `/Applications` while developing. Work from the project build:
 ```bash
 cd "$(dirname "$0")"
 
-# Quit any running CCTV, rebuild, codesign, relaunch (.build/release/CCTV.app)
+# Quit any running CCTV, rebuild, codesign, relaunch (.build/release/CCTV-<n>.app)
 make run
 
 # Same, automatically, whenever you save a Swift / Info.plist file (needs fswatch)
 make watch
 
-# Optional: install that build into /Applications for Login Items / daily use
+# Optional: install that build into /Applications/CCTV-<n>.app for Login Items / daily use
 make install
 
 make clean
 ```
 
-Dev launches use `.build/release/CCTV.app`. A stale `/Applications/CCTV.app` is a
-different binary — quit it (or use `make run`, which kills every CCTV process) so you’re
-not looking at an old build. Each rebuild bumps `CFBundleVersion` (check **About CCTV**);
-the marketing version stays until you change it on purpose.
+Dev launches use `.build/release/CCTV-<n>.app` (e.g. `CCTV-9.app`). Each rebuild bumps
+`CFBundleVersion` and stamps that number into the **display name**, **bundle id**, and
+**.app filename** so Finder and Screen Recording settings can’t mix this build up with
+an older “CCTV”. Check **About CCTV** for `v0.3.0 (n)`; marketing version stays until
+you change it on purpose.
 
-Ad-hoc signing means macOS may ask you to re-enable Screen Recording after rebuilds —
-that’s a platform limitation, not the watch workflow.
+Ad-hoc signing means macOS needs a fresh Screen Recording grant after rebuilds — grant
+the numbered app (e.g. **CCTV 9**), not a leftover plain **CCTV** entry.
 
 ## Storage
 
