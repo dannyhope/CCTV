@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dannify status — CCTV</title>
+  <link rel="stylesheet" href="operator.css">
+  <style>
+    .panel { margin: 0 0 1rem; }
+    .panel h2 { margin-top: 0; }
+    .panel ul { margin: 0 0 0.85rem; padding-left: 1.2rem; }
+    .panel li { margin: 0 0 0.35rem; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1>Dannify status — CCTV</h1>
+    <p class="meta">Living audit. Regenerated whenever <code>/dannify</code> runs. Last updated: 2026-08-25.</p>
+    <p class="hint">What still needs doing, then what’s already up to spec. Product truth is <code>_docs/spec.md</code> and <code>_docs/design.md</code>. Current KPI is <code>_docs/now.md</code>.</p>
+
+    <section class="panel">
+      <h2>Improvements</h2>
+      <h3>Must</h3>
+      <ul>
+        <li>Move <code>docs/spec.md</code> and <code>docs/design.md</code> to <code>_docs/</code> with living-doc headers (content is solid; path and header format don’t match the standard)</li>
+      </ul>
+      <h3>Should</h3>
+      <ul>
+        <li>Add <code>_docs/now.md</code> — current KPI (ask via <code>/goal</code>; don’t invent one)</li>
+        <li>Add <code>_vibing/</code> and ignore it in <code>.gitignore</code> (alongside existing <code>.DS_Store</code>)</li>
+        <li>Add feedback link to <code>https://dannyhope.co.uk/feedback</code> (README and/or About)</li>
+        <li>State accessibility level in <code>_docs/spec.md</code> (honest “none” is fine)</li>
+        <li>Add <code>CLAUDE.md</code> for development guidance (<code>make run</code>, permissions, build numbering)</li>
+        <li>Add CCTV to Bombay <code>projects.json</code></li>
+        <li>Add usability-test scaffold (<code>_docs/usability-tasks.json</code> + <code>usability-test.html</code>)</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Already right</h2>
+      <ul>
+        <li><code>.in/</code> inbox exists</li>
+        <li><code>docs/spec.md</code> states purpose, surfaces (menu / Dock / setup window), and behaviour</li>
+        <li><code>docs/design.md</code> is the look source of truth (native AppKit, system colours, SF Symbols)</li>
+        <li>README has a clear purpose section before build/install</li>
+        <li>Attribution “A Danny Hope product” → <code>https://dannyhope.co.uk</code> in README and About</li>
+        <li>No public third-party app hrefs that need dannyhope.co.uk hops</li>
+        <li><code>v0.3 (2025 Danny).code-workspace</code> exists with Peacock colour</li>
+        <li><code>.gitignore</code> includes <code>.DS_Store</code></li>
+        <li>Pure Swift/AppKit — skip shadcn, Prototype Panels, <code>.dev-port</code>, sitemap, Open in browser, Rebuild desktop app (uses <code>make run</code>)</li>
+        <li>Design system: OS appearance only (no theme picker); native system colours as documented</li>
+        <li>Show In: Menu Bar / Dock / Both preference is implemented and documented</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>
