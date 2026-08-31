@@ -129,6 +129,9 @@ rebuild and relaunch on save). `/Applications/CCTV-<n>.app` is only for a delibe
 `make install` — it is not updated by ordinary rebuilds. There is no live code reload;
 Swift must be recompiled, but quit → rebuild → relaunch is one command.
 
+The preferred local project address is `cctv.local`, recorded in the repository root
+as `.local-domain`. The native app is not a local web server.
+
 Set `CCTV_FORCE_PERMISSION_DENIED=1` to rehearse the permission flow without changing
 real system settings:
 

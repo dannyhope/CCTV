@@ -30,6 +30,9 @@ CCTV runs as a menu bar app and captures a screenshot of all connected displays 
 Native Swift can’t hot-reload like a web app — a rebuild is required — but you do **not**
 need to copy into `/Applications` while developing. Work from the project build:
 
+The preferred local project address is `cctv.local` (recorded in `.local-domain`).
+This native app does not bind a local web server.
+
 ```bash
 cd "$(dirname "$0")"
 
