@@ -31,13 +31,19 @@ Native Swift can’t hot-reload like a web app — a rebuild is required — but
 need to copy into `/Applications` while developing. Work from the project build:
 
 The preferred local project address is `cctv.local` (recorded in `.local-domain`).
-This native app does not bind a local web server.
+This native app does not bind a local web server, so the HTTP portless URL and
+browser live-reload workflow are not applicable. `make run` checks the hostname
+mapping before rebuilding and launching the app; the preferred metadata port is
+recorded in `.dev-port` for shared tooling, but CCTV does not listen on it.
 
 ```bash
 cd "$(dirname "$0")"
 
 # Quit any running CCTV, rebuild, codesign, relaunch (.build/release/CCTV-<n>.app)
 make run
+
+# Check that cctv.local is mapped to 127.0.0.1
+make check-local-domain
 
 # Same, automatically, whenever you save a Swift / Info.plist file (needs fswatch)
 make watch

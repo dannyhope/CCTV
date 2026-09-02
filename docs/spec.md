@@ -130,7 +130,11 @@ rebuild and relaunch on save). `/Applications/CCTV-<n>.app` is only for a delibe
 Swift must be recompiled, but quit → rebuild → relaunch is one command.
 
 The preferred local project address is `cctv.local`, recorded in the repository root
-as `.local-domain`. The native app is not a local web server.
+as `.local-domain`. CCTV is a pure native AppKit app and does not bind a local HTTP
+server, so it has no development HTTP port, browser live-reload workflow, or
+portless URL route. `make run` checks the hostname mapping for consistency but does
+not start a server. The shared Bombay port-80 proxy therefore needs no route for
+`cctv.local`; assigning `cctv.local` to development port `5284` would be incorrect.
 
 Set `CCTV_FORCE_PERMISSION_DENIED=1` to rehearse the permission flow without changing
 real system settings:

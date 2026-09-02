@@ -6,7 +6,7 @@ BUNDLE_ID_BASE = co.uk.dannyhope.cctv
 
 SHELL = /bin/bash
 
-.PHONY: build bump-build bundle codesign run watch install clean
+.PHONY: build bump-build bundle codesign run watch install check-local-domain clean
 
 # Read the current build number from Info.plist (after bump-build).
 build_number = $$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$(INFO_PLIST)")
@@ -15,6 +15,9 @@ install_app = /Applications/$(APP_NAME)-$(build_number).app
 
 build:
 	swift build -c release
+
+check-local-domain:
+	@./scripts/ensure-local-domain.sh
 
 # Increment CFBundleVersion and stamp the build number into the display name,
 # bundle name, and identifier so System Settings / Finder never mix this
@@ -51,7 +54,7 @@ codesign: bundle
 	echo "Signed $$bundle"
 
 # Quit any running CCTV (including a stale /Applications copy), then launch this build.
-run: codesign
+run: check-local-domain codesign
 	@pkill -x $(APP_NAME) 2>/dev/null || true
 	@sleep 0.25
 	@bn=$(build_number); \
