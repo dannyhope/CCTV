@@ -2,11 +2,11 @@
 
 ## Current Issues
 
-🔴 No graceful shutdown mechanism - script must be manually stopped which could lead to incomplete operations
+🔴 Product question: What should happen to an in-progress capture or video build when CCTV closes?
 
-🔴 No configuration file - all settings are hardcoded in the script
+🔴 Product question: Which CCTV settings should users be able to change?
 
-🔴 No visual feedback when screenshots are being taken
+🔴 Product question: How should CCTV show that a screenshot was taken?
 
 🟡 Error handling could be improved with more specific error types and recovery strategies
 
@@ -14,6 +14,6 @@
 
 🟡 No verification that screenshots were successfully saved before deleting temporary files
 
-🟢 Missing documentation for AppleScript-specific implementation details
+🟢 Product question: Is any documentation still needed for the old AppleScript implementation, or should this obsolete item be removed?
 
 🟢 No visual debugging information displayed in screenshots for troubleshooting

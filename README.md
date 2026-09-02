@@ -139,9 +139,9 @@ open --env CCTV_FORCE_PERMISSION_DENIED=1 .build/release/CCTV.app
 
 ## Notes
 
-- Videos are compiled at midnight UTC, not local time (adjust system timezone if needed)
+- Videos are compiled using the Mac's local timezone. Product decision needed: should this remain local time, use UTC, or be configurable?
 - Multi-display setups create separate video files per display
-- Storage grows at ~1–2 GB per day depending on display resolution and activity
+- Storage grows at ~1–2 GB per day depending on display resolution and activity. Product decision needed: is this acceptable, or should retention/compression controls be prioritised?
 
 ---
 

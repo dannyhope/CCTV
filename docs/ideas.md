@@ -2,12 +2,12 @@
 
 ## Potential Improvements
 - Add a simple GUI interface to start/stop the screenshot process
-- Implement variable screenshot intervals (e.g., take more frequent screenshots during work hours)
+- Product question: Should CCTV take screenshots more often at certain times, such as during working hours?
 - Add image compression options to further reduce file size
-- Create a viewer application to browse through the screenshot timeline
-- Add motion detection to only save screenshots when changes are detected
-- Implement face blurring for privacy
-- Add option to upload screenshots to a secure cloud service
+- Product question: Is opening the finished video in QuickTime enough, or should CCTV include a screen for browsing the screenshot timeline?
+- Product question: Should CCTV save a screenshot only when the screen changes?
+- Product question: Should CCTV automatically blur faces or other private information?
+- Product question: Should CCTV ever send screenshots away from the Mac? If yes, where should they go and what privacy protections are required?
 
 ## Existing Tools
 - **Chronolapse**: Open-source tool that takes screenshots at intervals
@@ -21,6 +21,6 @@
 - **FFmpeg**: For potentially creating timelapse videos from the screenshots
 
 ## Architecture Ideas
-- Implement a client-server model where screenshots are sent to a central server
-- Use a database to track and organize screenshots with metadata
-- Implement a plugin system for different capture and processing methods
+- Product question: Should CCTV support several Macs sending screenshots to one central service?
+- Product question: Does CCTV need a searchable database about screenshots, or are folders and videos enough?
+- Product question: Should other developers be able to add capture or video-processing plugins?
