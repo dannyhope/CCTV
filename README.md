@@ -69,7 +69,7 @@ records and the term index are kept so they can power a future search UI.
 ## Menu Bar Options
 
 - **Status** – Shows current state (Capturing/Idle) and screenshot count for today
-- **Start/Stop Capturing** – Toggle automatic 60-second capture interval
+- **Start/Stop Capturing** – Toggle automatic 60-second capture interval; capture starts on launch
 - **Compile Today's Video** – Manually compile today's screenshots into video
 - **Take Screenshot Now** – Capture immediately without waiting for the next interval
 - **Open Storage Folder** – Browse screenshots and videos in Finder
@@ -79,7 +79,7 @@ records and the term index are kept so they can power a future search UI.
 ## How It Works
 
 ### Capture Phase
-1. Every 60 seconds, the app uses `ScreenCaptureKit` to capture all displays at 2x resolution
+1. At launch, and then every 60 seconds, the app uses `ScreenCaptureKit` to capture all displays at 2x resolution
 2. Each display is saved as a JPEG with 70% compression
 3. Screenshots are timestamped and organized by date
 4. Vision OCR extracts text from each image; the full text is stored under `ocr/verbatim/` and terms are appended to `ocr/index.json`

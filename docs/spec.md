@@ -20,7 +20,8 @@ menu bar item.
 
 - Every 60 seconds, all connected displays are captured at 2x via ScreenCaptureKit.
 - Saved as JPEG at 70% quality, no cursor, one file per display.
-- Capture does not start on its own; the user starts it from the menu.
+- Capture starts immediately when CCTV launches and repeats every 60 seconds.
+- The menu bar control can stop and restart capturing.
 - After each display image is saved, macOS Vision OCR (`VNRecognizeTextRequest`,
   accurate recognition with language correction) extracts the on-screen text.
 - OCR is best-effort: a recognition or store failure must not prevent the screenshot

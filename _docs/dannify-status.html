@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dannify status — CCTV</title>
+  <link rel="stylesheet" href="operator.css">
+  <style>
+    .panel { margin: 0 0 1rem; }
+    .panel h2 { margin-top: 0; }
+    .panel ul { margin: 0 0 .85rem; padding-left: 1.2rem; }
+    .panel li { margin: 0 0 .35rem; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1>Dannify status — CCTV</h1>
+    <p class="meta">Living audit. Regenerated whenever <code>/dannify</code> runs. Last updated: 2026-09-07.</p>
+    <p class="hint">What still needs doing, then what’s already up to spec. Product truth is <code>_docs/spec.md</code> and <code>_docs/design.md</code>. Current KPI is <code>_docs/now.md</code>.</p>
+
+    <section class="panel">
+      <h2>Improvements</h2>
+      <h3>Must</h3>
+      <ul>
+        <li>🔴 Add <code>_docs/spec.md</code> with the living product spec; the current source is <code>docs/spec.md</code>.</li>
+        <li>🔴 Add <code>_docs/design.md</code> as the living look source of truth.</li>
+        <li>🔴 Move the product attribution into the product documentation/source-of-truth structure and keep its wording consistent.</li>
+      </ul>
+      <h3>Should</h3>
+      <ul>
+        <li>🟠 Add a persisted <strong>Show In</strong> choice for Menu Bar / Dock / Both; the current app is locked to accessory/menu-bar mode.</li>
+        <li>🟠 Add a user-facing feedback link to <code>https://dannyhope.co.uk/feedback</code>.</li>
+        <li>🟠 State the accessibility level in the product spec.</li>
+        <li>🟠 Add <code>CLAUDE.md</code> with development guidance.</li>
+        <li>🟠 Add a product-check report assessing validity, evidence, viability, and goal alignment.</li>
+        <li>🟠 Add the usability-test scaffold: predicted issues, facilitator tasks, and runner.</li>
+        <li>🟠 Add a Shift+? / Shift+/ shortcut overlay and tooltips where shortcuts exist.</li>
+        <li>🟠 Add a project launcher if the local app workflow needs a standard executable entry point.</li>
+        <li>🟠 Add this project to <code>/Users/dannyhope/Dropbox/Bombay/projects.json</code>.</li>
+      </ul>
+      <h3>Nice</h3>
+      <ul>
+        <li>🟢 Add a shared developer-only Prototype Panels surface if developer flags are needed.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Already right</h2>
+      <ul>
+        <li>Native Swift/AppKit macOS app with a menu-bar surface and no web UI; web-only and browser-server checks are not applicable.</li>
+        <li><code>Package.swift</code> declares macOS 14 and Swift 5.10-compatible package tooling.</li>
+        <li><code>README.md</code> explains the purpose before build and usage instructions.</li>
+        <li><code>.in/</code> inbox exists, a workspace file exists, and <code>.DS_Store</code> is ignored.</li>
+        <li>OCR tests exist under <code>Tests/CCTVTests</code>.</li>
+        <li>Current product behaviour is documented in <code>docs/spec.md</code>; the requested runtime presence rule is the remaining gap.</li>
+        <li>No sitemap, local-domain, dev-port, shadcn, operator-page, or browser-server checks apply to this pure native app.</li>
+        <li>Canonical Goals page could not be refreshed automatically in this audit; no <code>_docs/now.md</code> current KPI was verified.</li>
+        <li>Connected checker results: no <code>_docs/checks/</code> results found; applicable checkers are never run.</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>

@@ -31,6 +31,9 @@ final class StatusBarController {
 			self?.updateStatus()
 		}
 
+		// Start capturing as soon as the app launches. The first capture
+		// also prompts for Screen Recording permission when needed.
+		scheduleController.start()
 		updateStatus()
 	}
 
