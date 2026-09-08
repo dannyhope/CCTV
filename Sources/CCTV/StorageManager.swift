@@ -17,12 +17,17 @@ final class StorageManager {
 		return f
 	}()
 
-	private init() {
+	init(baseURL: URL? = nil) {
+		if let baseURL {
+			self.baseURL = baseURL
+			return
+		}
+
 		let appSupport = FileManager.default.urls(
 			for: .applicationSupportDirectory,
 			in: .userDomainMask
 		).first!
-		baseURL = appSupport.appendingPathComponent("CCTV", isDirectory: true)
+		self.baseURL = appSupport.appendingPathComponent("CCTV", isDirectory: true)
 	}
 
 	func screenshotsDirectory(for date: Date = Date()) -> URL {

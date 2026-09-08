@@ -12,7 +12,8 @@ actor OCRStore {
 
 	private let isoFormatter: ISO8601DateFormatter = {
 		let formatter = ISO8601DateFormatter()
-		formatter.formatOptions = [.withInternetDateTime]
+		formatter.formatOptions = [.withInternetDateTime, .withTimeZone]
+		formatter.timeZone = TimeZone(secondsFromGMT: 0)
 		return formatter
 	}()
 
@@ -21,6 +22,12 @@ actor OCRStore {
 		encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
 		return encoder
 	}()
+
+	private let storageManager: StorageManager
+
+	init(storageManager: StorageManager = .shared) {
+		self.storageManager = storageManager
+	}
 
 	func store(text: String, displayIndex: Int, date: Date) throws {
 		let timestamp = isoFormatter.string(from: date)
@@ -39,10 +46,10 @@ actor OCRStore {
 		date: Date,
 		timestamp: String
 	) throws {
-		let directory = StorageManager.shared.ocrVerbatimDirectory(for: date)
-		try StorageManager.shared.ensureDirectory(directory)
+		let directory = storageManager.ocrVerbatimDirectory(for: date)
+		try storageManager.ensureDirectory(directory)
 
-		let filename = StorageManager.shared.ocrVerbatimFilename(
+		let filename = storageManager.ocrVerbatimFilename(
 			displayIndex: displayIndex,
 			date: date
 		)
@@ -62,8 +69,8 @@ actor OCRStore {
 		let terms = Self.tokenize(text)
 		guard !terms.isEmpty else { return }
 
-		let indexURL = StorageManager.shared.ocrIndexURL
-		try StorageManager.shared.ensureDirectory(
+		let indexURL = storageManager.ocrIndexURL
+		try storageManager.ensureDirectory(
 			indexURL.deletingLastPathComponent()
 		)
 

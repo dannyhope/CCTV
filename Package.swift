@@ -14,6 +14,11 @@ let package = Package(
 			swiftSettings: [
 				.unsafeFlags(["-strict-concurrency=targeted"])
 			]
+		),
+		.testTarget(
+			name: "CCTVTests",
+			dependencies: ["CCTV"],
+			path: "Tests/CCTVTests"
 		)
 	]
 )
